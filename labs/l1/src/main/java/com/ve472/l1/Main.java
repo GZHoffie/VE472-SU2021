@@ -26,11 +26,8 @@ class Customer {
 }
 
 public class Main {
-
-
-
-
     public static void main(String[] args) {
+        // Parse Options
         Options options = new Options();
         Option help = new Option("h", "help", false, "print this message");
         options.addOption(help);
@@ -61,12 +58,7 @@ public class Main {
             return;
         }
 
-
-
-
-
-
-
+        // Main Block
         Cinema cinema = new Cinema();
         cinema.readDir(cmd.getOptionValue("hall"));
 
