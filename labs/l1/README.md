@@ -26,4 +26,11 @@ source ~/.bashrc
 
 Confirm installation with `mvn -v`
 
+## Compilation
+Compile using IntelliJ IDEA using maven and type in the command line,
+```bash
+java -jar target/ve472l1-1.0-SNAPSHOT.jar
+```
+
+
 

@@ -14,6 +14,7 @@ public class Cinema {
         only files (no sub-directory)
          */
         File dir = new File(dirName);
+        // Read files in directory
         for (final File f : Objects.requireNonNull(dir.listFiles())){
             if (f.isDirectory()){
                 continue;
@@ -25,18 +26,24 @@ public class Cinema {
             if (movieMap.containsKey(movieName)) {
                 List<Hall> hallList = movieMap.get(movieName);
                 hallList.add(hall);
-                movieMap.replace(movieName, hallList);
             } else {
                 // No hall found for this movie yet.
                 List<Hall> newList = new ArrayList<>();
                 newList.add(hall);
                 movieMap.put(movieName, newList);
             }
+        }
 
+        // Order the halls in the lists alphabetically
+        for (String s : movieMap.keySet()) {
+            List<Hall> hallList = movieMap.get(s);
+            hallList.sort(Comparator.comparing(Hall::getHallName));
+            movieMap.replace(s, hallList);
         }
     }
 
     public void printMovieList() {
+        // For debugging
         for (String s : movieMap.keySet()) {
             System.out.print(s + ": ");
             List<Hall> l = movieMap.get(s);
@@ -45,20 +52,10 @@ public class Cinema {
             }
             System.out.print("\n");
         }
-        /*
-        for (Map.Entry<String, List<Hall>> me : movieMap.entrySet()) {
-            System.out.print(me.getKey() + ": ");
-            List<Hall> hallList = me.getValue();
-            for (Hall h : hallList) {
-                System.out.print(h.getHallName() + " ");
-            }
-            System.out.print("\n");
-        }
-
-         */
     }
 
     public void printHallList() {
+        // For debugging
         for (Map.Entry<String, Hall> me : hallNameMap.entrySet()) {
             Hall h = me.getValue();
             System.out.println(me.getKey() + ": " + h.getMovieName());

@@ -6,7 +6,7 @@ import java.util.List;
 public class TestHall {
     public static void main(String[] args) {
         Hall hall = new Hall();
-        File configFile = new File("sample.config");
+        File configFile = new File("config/sample.config");
         hall.readConfig(configFile);
         System.out.println(hall.getHallName());
         for (List<Boolean> l : hall.seats) {
