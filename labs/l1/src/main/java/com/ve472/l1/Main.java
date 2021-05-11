@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.commons.cli.*;
+import org.graalvm.compiler.nodes.calc.IntegerDivRemNode;
+
 class Customer {
     String name;
     String movieName;
@@ -23,11 +26,51 @@ class Customer {
 }
 
 public class Main {
-    public static void main(String[] args) {
-        Cinema cinema = new Cinema();
-        cinema.readDir("config");
 
-        File customerInfoFile = new File("input/test.in");
+
+
+
+    public static void main(String[] args) {
+        Options options = new Options();
+        Option help = new Option("h", "help", false, "print this message");
+        options.addOption(help);
+
+        Option hall = new Option(null, "hall", true, "path of the hall config directory");
+        hall.setRequired(true);
+        options.addOption(hall);
+
+        Option query = new Option(null, "query", true, "query of customer orders");
+        query.setRequired(true);
+        options.addOption(query);
+
+        CommandLineParser parser = new DefaultParser();
+        HelpFormatter formatter = new HelpFormatter();
+        CommandLine cmd;
+
+        try {
+            cmd = parser.parse(options, args);
+            if (cmd.hasOption("h")) {
+                formatter.printHelp("cinema", options);
+                System.exit(0);
+                return;
+            }
+        } catch (ParseException e) {
+            // System.out.println(e.getMessage());
+            formatter.printHelp("cinema", options);
+            System.exit(1);
+            return;
+        }
+
+
+
+
+
+
+
+        Cinema cinema = new Cinema();
+        cinema.readDir(cmd.getOptionValue("hall"));
+
+        File customerInfoFile = new File(cmd.getOptionValue("query"));
         List<Customer> customers = new ArrayList<>();
         try {
             Scanner scanner = new Scanner(customerInfoFile);

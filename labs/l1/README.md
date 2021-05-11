@@ -26,11 +26,44 @@ source ~/.bashrc
 
 Confirm installation with `mvn -v`
 
-## Compilation
+## Compilation and Running
+
 Compile using IntelliJ IDEA using maven and type in the command line,
+
 ```bash
-java -jar target/ve472l1-1.0-SNAPSHOT.jar
+java -jar target/ve472l1-1.0-SNAPSHOT.jar --hall config --query input/test.in
 ```
+
+## Trouble shooting
+
+1. When using IntelliJ IDEA to build a maven project and meeting
+
+   ```
+   No goals have been specified for this build.
+   ```
+   bug, add the following line after `<build>`
+   
+   ```xml
+   <defaultGoal>package</defaultGoal>
+   ```
+   which would give you the same effect as `mvn package` when building.
+
+1. When we want to add a dependency, for example `Apache Commons CLI`, then we can search on [mvnrepository](mvnrepository.com) for the package, find the maven configuration, then copy and paste the configuration into the `<dependencies>` block in `pom.xml`.
+
+   For example, on this [website](https://mvnrepository.com/artifact/commons-cli/commons-cli/1.4) we can find the configuration to Apache Common CLI 1.4. Copying it into the file gives us
+   
+   ```xml
+       <dependencies>
+           <!-- https://mvnrepository.com/artifact/commons-cli/commons-cli -->
+           <dependency>
+               <groupId>commons-cli</groupId>
+               <artifactId>commons-cli</artifactId>
+               <version>1.4</version>
+           </dependency>
+       </dependencies>
+   ```
+   
+   If you are using IntelliJ IDEA, a `load maven changes` button would appear, and clicking it would automatically install the package for you. You can find the library in `External Libraries` under your project.
 
 
 
