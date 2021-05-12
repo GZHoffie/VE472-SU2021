@@ -53,7 +53,7 @@ public class Main {
         } catch (ParseException e) {
             // System.out.println(e.getMessage());
             formatter.printHelp("cinema", options);
-            System.exit(1);
+            System.exit(0);
             return;
         }
 
@@ -68,7 +68,9 @@ public class Main {
             while (scanner.hasNextLine()) {
                 String info = scanner.nextLine();
                 String[] infoSplit = info.split(",");
-                Customer c = new Customer(infoSplit[0], infoSplit[1], Integer.parseInt(infoSplit[2]));
+                Customer c = new Customer(infoSplit[0].trim(),
+                                          infoSplit[1].trim(),
+                                          Integer.parseInt(infoSplit[2].trim()));
                 customers.add(c);
             }
         } catch (FileNotFoundException e){
@@ -76,11 +78,14 @@ public class Main {
         }
         for (Customer c : customers) {
             Seat bestSeat = null;
-            for (Hall h : cinema.movieMap.get(c.movieName)) {
-                bestSeat = h.assignSeat(c.numSeats);
-                if (bestSeat != null) {
-                    c.assignedHallName = h.getHallName();
-                    break;
+            List<Hall> halls = cinema.movieMap.get(c.movieName);
+            if (halls != null) {
+                for (Hall h : cinema.movieMap.get(c.movieName)) {
+                    bestSeat = h.assignSeat(c.numSeats);
+                    if (bestSeat != null) {
+                        c.assignedHallName = h.getHallName();
+                        break;
+                    }
                 }
             }
             c.assignedSeat = bestSeat;

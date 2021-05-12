@@ -49,7 +49,9 @@ public class Hall {
             }
 
             numRows = seats.size();
-            numCols = seats.get(0).size();
+            if (seats.size() > 0) {
+                numCols = seats.get(0).size();
+            }
             backCenterX = numRows;
             backCenterY = (numCols + 1) / 2.0;
         } catch (FileNotFoundException e){
@@ -64,7 +66,7 @@ public class Hall {
          */
         assert (seat.row >= 0 && seat.row < numRows
                 && seat.col >= 0 && seat.col < numCols);
-        if (seat.col + numSeats >= numCols) {
+        if (seat.col + numSeats > numCols) {
             return false;
         }
         for (int i = 0; i < numSeats; i++) {
@@ -93,7 +95,7 @@ public class Hall {
             double minDistance = -1;
             Seat bestSeat = null;
             for (int row = numRows - 1; row >= 0; row--) {
-                for (int col = 0; col < numCols - numSeats; col++) {
+                for (int col = 0; col <= numCols - numSeats; col++) {
                     Seat seat = new Seat(row, col);
                     if (hasConsecutiveSeats(seat, numSeats)) {
                         double distance = distanceToCentroid(seat, numSeats);
