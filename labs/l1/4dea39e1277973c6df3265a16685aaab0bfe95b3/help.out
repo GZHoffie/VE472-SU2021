@@ -1,4 +1,0 @@
-usage: cinema
- -h,--help          print this message
-    --hall <arg>    path of the hall config directory
-    --query <arg>   query of customer orders
