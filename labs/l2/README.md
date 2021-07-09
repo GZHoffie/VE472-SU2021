@@ -74,7 +74,6 @@ Note: sorry that some of the links below are in Chinese
   7249 SecondaryNameNode
   7025 NameNode
   8515 Jps
-  7418 DataNode
   7915 NodeManager
   7582 ResourceManager
   ```

@@ -1,0 +1,90 @@
+languages:
+  - language: java
+    compiler_args: javac -d /out -encoding utf8 -classpath /in/com/ve472/l1/:/in/driver/commons-cli-1.4.jar /in/com/ve472/l1/Main.java /in/com/ve472/l1/Cinema.java /in/com/ve472/l1/Hall.java
+    execute_args: java -classpath .:commons-cli-1.4.jar com.ve472.l1.Main
+default: &default
+  time: 1s
+  memory: 128m
+  score: 10
+compile_time_files: driver/
+runtime_files: driver/
+cases:
+  - <<: *default
+    input: empty.in
+    output: help.out
+  - <<: *default
+    input: empty.in
+    output: help.out
+    execute_args: -h
+  - <<: *default
+    input: empty.in
+    output: help.out
+    execute_args: --help
+  - <<: *default
+    input: empty.in
+    output: help.out
+    execute_args: --hall
+  - <<: *default
+    input: empty.in
+    output: help.out
+    execute_args: --query
+  - <<: *default
+    input: empty.in
+    output: help.out
+    execute_args: --test
+  - <<: *default
+    input: empty.in
+    output: help.out
+    execute_args: --hall hall --query
+  - <<: *default
+    input: empty.in
+    output: help.out
+    execute_args: --hall --query empty.txt
+  - <<: *default
+    input: empty.in
+    output: empty.out
+    execute_args: --hall hall --query empty.txt
+  - <<: *default
+    input: case9.in
+    output: case9.out
+    execute_args: --hall case9 --query case9.txt
+  - <<: *default
+    input: case10.in
+    output: case10.out
+    execute_args: --hall case10 --query case10.txt
+  - <<: *default
+    input: case11.in
+    output: case11.out
+    execute_args: --hall case11 --query case11.txt
+  - <<: *default
+    input: case12.in
+    output: case12.out
+    execute_args: --hall case9 --query case12.txt
+  - <<: *default
+    input: case13.in
+    output: case13.out
+    execute_args: --hall case9 --query case13.txt
+  - <<: *default
+    input: case14.in
+    output: case14.out
+    execute_args: --hall case14 --query case14.txt
+  - <<: *default
+    input: case15.in
+    output: case15.out
+    execute_args: --hall case14 --query case15.txt
+  - <<: *default
+    input: case16.in
+    output: case16.out
+    execute_args: --hall case14 --query case16.txt
+  - <<: *default
+    input: case17.in
+    output: case17.out
+    execute_args: --hall case14 --query case17.txt
+  - <<: *default
+    input: case18.in
+    output: case18.out
+    execute_args: --hall case14 --query case18.txt
+  - <<: *default
+    input: case19.in
+    output: case19.out
+    execute_args: --hall case14 --query case19.txt
